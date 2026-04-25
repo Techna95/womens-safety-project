@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript &amp; jQuery - Chapter 6: Events - Keypress</title>
+    <link rel="stylesheet" href="lodgecomplaint.css"/>
+  </head>
+  
+  <body>
+    
+    <div id="page">
+     <div id="navigation">
+      <ul >
+				<li><a href="../LiveSlideshow/LiveSlides.html">Home</a></li>
+				<li><a href="Lodge complaint/lodgecomplaint.html">Lodge complaint</a></li>
+				<li><a href="../location tracking/locationtrack.html">Live Tracker</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+     </div>
+       <form method="post" action="http://www.example.org/register">
+
+        <h2>My profile</h2>
+        <label for="username">Create a username: </label>
+        <input type="text" id="username" /><div id="feedback"></div>
+
+        <label for="password">Create a password: </label>
+        <input type="password" id="password" />
+  	    
+        <label for="complain">Lodge your complain within 180 words </label>
+        <textarea id="message"></textarea>
+        <input type="submit" value="Lodge Complaint" />
+
+        <div id="charactersLeft">180 characters</div>
+        <div id="lastKey"></div>
+      </form>
+    </div>
+    <script src="lodgeComplaint.js"></script>
+  </body>
+</html>

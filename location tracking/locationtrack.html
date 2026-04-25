@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Live Location Tracking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        #map {
+            height: 100vh; /* Full screen height */
+            width: 100%;
+        }
+        ul {
+				width: 570px;
+				padding: 15px;
+				margin: 0px auto 0px auto;
+				border-top: 2px solid #000;
+				border-bottom: 1px solid #000;
+				text-align: center;}
+			li {
+				display: inline;
+				margin: 0px 3px;}
+
+
+    </style>
+</head>
+<body>
+    <ul id="navigation">
+				<li><a href="../LiveSlideshow/LiveSlides.html">Home</a></li>
+				<li><a href="../Lodge complaint/lodgecomplaint.html">Lodge complaint</a></li>
+				<li><a href="../location tracking/locationtrack.html">Live Tracker</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+	</ul>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // Initialize map
+    const map = L.map('map').setView([0, 0], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Marker for user's location
+    let marker = L.marker([0, 0]).addTo(map);
+
+    // Check if geolocation is available
+    if ("geolocation" in navigator) {
+        navigator.geolocation.watchPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                // Update marker position
+                marker.setLatLng([lat, lon]);
+
+                // Center map on user's location
+                map.setView([lat, lon], 16);
+
+                console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+            },
+            (error) => {
+                console.error("Error getting location:", error.message);
+                alert("Unable to retrieve location. Please enable GPS.");
+            },
+            {
+                enableHighAccuracy: true, // Use GPS if available
+                maximumAge: 0,           // No cached position
+                timeout: 10000           // 10 seconds timeout
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+</script>
+
+</body>
+</html>
